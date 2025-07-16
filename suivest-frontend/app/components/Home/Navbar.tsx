@@ -2,11 +2,12 @@
 import Image from "next/image";
 import images from "@/app/assets/image";
 import React, { useState } from "react";
+import Link from "next/link";
 
 const navLinks = [
-  { label: "Home", href: "#" },
-  { label: "Pools", href: "#" },
-  { label: "About", href: "#" },
+  { label: "Home", href: "/" },
+  { label: "Pools", href: "/pools" },
+  { label: "About", href: "/about" },
   { label: "Account", href: "#" },
 ];
 
@@ -25,9 +26,15 @@ const Navbar = () => {
         <ul className="hidden sm:flex flex-row items-center gap-8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           {navLinks.map((link) => (
             <li key={link.label}>
-              <a href={link.href} className="hover:text-blue-600 transition text-base font-medium text-[#111827]">
-                {link.label}
-              </a>
+              {link.label === "Pools" || link.label === "Home" ? (
+                <Link href={link.href} className="hover:text-blue-600 transition text-base font-medium text-[#111827]">
+                  {link.label}
+                </Link>
+              ) : (
+                <a href={link.href} className="hover:text-blue-600 transition text-base font-medium text-[#111827]">
+                  {link.label}
+                </a>
+              )}
             </li>
           ))}
         </ul>
@@ -56,9 +63,15 @@ const Navbar = () => {
           <ul className="flex flex-col sm:hidden absolute left-0 top-full w-full bg-white/90 rounded-xl p-4 shadow z-40">
             {navLinks.map((link) => (
               <li key={link.label}>
-                <a href={link.href} className="hover:text-blue-600 transition block py-2 text-base font-medium text-gray-800">
-                  {link.label}
-                </a>
+                {link.label === "Pools" || link.label === "Home" ? (
+                  <Link href={link.href} className="hover:text-blue-600 transition block py-2 text-base font-medium text-gray-800">
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a href={link.href} className="hover:text-blue-600 transition block py-2 text-base font-medium text-gray-800">
+                    {link.label}
+                  </a>
+                )}
               </li>
             ))}
             <li className="w-full mt-2">
