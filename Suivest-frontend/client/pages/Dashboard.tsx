@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import icons from "../lib/icons";
 import { Progress } from "@/components/ui/progress";
 import {
   Card,
@@ -65,55 +66,55 @@ const userPools: UserPool[] = [
   {
     id: "1",
     token: {
-      name: "Sui",
+      name: "SUI",
       symbol: "SUI",
-      logo: "💧",
+      logo: icons.SUI,
       color: "electric",
     },
-    deposited: "$350.00",
-    weeklyPrize: "$1,500",
+    deposited: "$0.00",
+    weeklyPrize: "$0",
     streakWeeks: 7,
     isActive: true,
-    nextDraw: "2d 14h",
+    nextDraw: "0d 0h",
   },
   {
     id: "2",
     token: {
-      name: "USD Coin",
+      name: "USDC",
       symbol: "USDC",
-      logo: "💵",
+      logo: icons.USDC,
       color: "teal",
     },
-    deposited: "$500.00",
-    weeklyPrize: "$2,200",
+    deposited: "$0.00",
+    weeklyPrize: "$0",
     streakWeeks: 3,
     isActive: true,
-    nextDraw: "4d 8h",
+    nextDraw: "0d 0h",
   },
 ];
 
 const rewardHistory: RewardHistoryItem[] = [
   {
     id: "1",
-    week: "Week 42",
+    week: "Week 1",
     pool: "USDC Pool",
-    prize: "$22.50",
+    prize: "$0.00",
     claimed: true,
     date: "2024-01-15",
   },
   {
     id: "2",
-    week: "Week 38",
+    week: "Week 1",
     pool: "SUI Pool",
-    prize: "$19.80",
+    prize: "$0.00",
     claimed: true,
     date: "2024-01-01",
   },
   {
     id: "3",
-    week: "Week 35",
+    week: "Week 1",
     pool: "USDC Pool",
-    prize: "$31.20",
+    prize: "$0.00",
     claimed: false,
     date: "2023-12-18",
   },
@@ -121,10 +122,10 @@ const rewardHistory: RewardHistoryItem[] = [
 
 const Dashboard = () => {
   const [username] = useState("0x1234...5678");
-  const totalTickets = 43;
-  const svtTokens = 1500;
-  const totalDeposited = 850.0;
-  const rewardsEarned = 73.5;
+  const totalTickets = 0;
+  const svtTokens = 0;
+  const totalDeposited = 0.0;
+  const rewardsEarned = 0.0;
 
   const streakWeeks = [
     { week: 1, completed: true },
@@ -188,7 +189,7 @@ const Dashboard = () => {
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-400">Streak Progress</span>
                     <span className="font-medium text-electric">
-                      7/10 weeks
+                      0/10 weeks
                     </span>
                   </div>
                   <div className="w-full bg-web3-border rounded-full h-2">
@@ -219,7 +220,7 @@ const Dashboard = () => {
                 </div>
                 <div className="flex items-center space-x-1 text-sm">
                   <TrendingUp className="w-4 h-4 text-teal" />
-                  <span className="text-teal font-medium">+125 this week</span>
+                  <span className="text-teal font-medium">+0 this week</span>
                 </div>
               </div>
             </CardContent>
@@ -241,7 +242,7 @@ const Dashboard = () => {
                   ${totalDeposited.toFixed(2)}
                 </div>
                 <div className="text-sm text-gray-400 font-mono-crypto">
-                  Across 2 pools
+                  Across - pools
                 </div>
               </div>
             </CardContent>
@@ -264,7 +265,7 @@ const Dashboard = () => {
                 </div>
                 <div className="flex items-center space-x-1 text-sm">
                   <Trophy className="w-4 h-4 text-purple" />
-                  <span className="text-purple font-medium">3 wins total</span>
+                  <span className="text-purple font-medium">0 wins total</span>
                 </div>
               </div>
             </CardContent>
@@ -297,7 +298,11 @@ const Dashboard = () => {
                         <div
                           className={`w-12 h-12 rounded-xl bg-${pool.token.color}/10 flex items-center justify-center text-2xl border border-${pool.token.color}/20`}
                         >
-                          {pool.token.logo}
+                          <img
+                            src={pool.token.logo}
+                            alt={pool.token.symbol + " logo"}
+                            className="w-8 h-8"
+                          />
                         </div>
                         <div>
                           <h4 className="font-semibold text-white">
@@ -343,7 +348,7 @@ const Dashboard = () => {
                             <Button
                               size="sm"
                               variant="outline"
-                              className="border-electric/30 text-electric hover:bg-electric hover:text-web3-bg rounded-full bg-electric/5"
+                              className="border-electric/30 text-electric hover:bg-electric hover:text-white rounded-full bg-electric/5"
                             >
                               <Target className="w-4 h-4 mr-1" />
                               Boost Odds

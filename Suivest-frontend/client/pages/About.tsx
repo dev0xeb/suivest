@@ -186,7 +186,7 @@ const About = () => {
                 </Card>
 
                 {index < 2 && (
-                  <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center z-10">
+                  <div className=" md:block absolute top-1/2 -right-4 w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center z-10">
                     <ArrowRight className="w-4 h-4 text-gray-400" />
                   </div>
                 )}

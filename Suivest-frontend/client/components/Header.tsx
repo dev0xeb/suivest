@@ -21,22 +21,16 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full glass-dark border-b border-web3-border">
+    <header className="bg-web3-dark sticky top-0 z-50 w-full glass-dark border-b border-web3-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-electric via-purple to-teal rounded-xl flex items-center justify-center animate-pulse-glow">
-              <span className="text-white font-bold text-xl">S</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-bold text-white group-hover:text-gradient-electric transition-all duration-300">
-                SUIVEST
-              </span>
-              <span className="text-xs text-gray-400 font-mono-crypto">
-                on Sui
-              </span>
-            </div>
+            <img 
+              src="/ChatGPT_Image_Jul_23__2025__04_20_53_PM-removebg-preview.png" 
+              alt="Suivest Logo" 
+              className="w-[70px] h-[70px] object-contain"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -55,9 +49,9 @@ const Header = () => {
 
           {/* Wallet Connect Button */}
           <div className="hidden md:flex items-center space-x-4">
-            <div className="text-xs text-gray-400 font-mono-crypto">
+            {/* <div className="text-xs text-gray-400 font-mono-crypto">
               <div>Block: #2,847,391</div>
-            </div>
+            </div> */}
             <Button
               onClick={handleWalletConnect}
               className="bg-gradient-to-r from-electric to-purple hover:from-electric/90 hover:to-purple/90 text-white px-6 py-3 rounded-xl flex items-center space-x-2 transition-all duration-300 btn-glow border border-electric/20 hover:border-electric/40"

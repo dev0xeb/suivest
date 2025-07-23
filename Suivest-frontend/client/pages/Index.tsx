@@ -519,11 +519,12 @@ const Index = () => {
           <div className="grid md:grid-cols-4 gap-8">
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-electric via-purple to-teal rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">S</span>
-                </div>
+                <img 
+                  src="/ChatGPT_Image_Jul_23__2025__04_20_53_PM-removebg-preview.png" 
+                  alt="Suivest Logo" 
+                  className="w-[70px] h-[70px] object-contain"
+                />
                 <div>
-                  <span className="text-xl font-bold">SUIVEST</span>
                   <div className="text-xs text-gray-400 font-mono-crypto">
                     Decentralized Savings Protocol
                   </div>

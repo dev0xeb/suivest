@@ -183,13 +183,11 @@ const Docs = () => {
   };
 
   return (
-    <div
-      className={`min-h-screen ${isDarkMode ? "dark bg-gray-900" : "bg-gray-50"}`}
-    >
+    <div className="min-h-screen bg-white text-navy">
       <div className="flex">
         {/* Sidebar */}
         <div
-          className={`fixed inset-y-0 left-0 z-50 w-80 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transform transition-transform duration-300 ${
+          className={`fixed inset-y-0 left-0 z-50 w-80 bg-white text-navy border-r border-gray-200 transform transition-transform duration-300 ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           } lg:translate-x-0 lg:static lg:inset-0`}
         >
@@ -198,7 +196,7 @@ const Docs = () => {
               <div className="w-8 h-8 bg-electric rounded-lg flex items-center justify-center">
                 <BookOpen className="w-4 h-4 text-white" />
               </div>
-              <span className="font-bold text-lg dark:text-white">
+              <span className="font-bold text-lg text-navy">
                 SUIVEST Docs
               </span>
             </div>
@@ -206,12 +204,12 @@ const Docs = () => {
               variant="ghost"
               size="sm"
               onClick={() => setIsDarkMode(!isDarkMode)}
-              className="h-8 w-8 p-0"
+              className="h-8 w-8 p-0 text-navy"
             >
               {isDarkMode ? (
-                <Sun className="w-4 h-4" />
-              ) : (
                 <Moon className="w-4 h-4" />
+              ) : (
+                <Sun className="w-4 h-4" />
               )}
             </Button>
           </div>
@@ -233,14 +231,14 @@ const Docs = () => {
                       }
                     }}
                   >
-                    <section.icon className="w-4 h-4 mr-2 flex-shrink-0" />
+                    <section.icon className="w-4 h-4 mr-2 flex-shrink-0 text-navy" />
                     <span className="flex-1">{section.title}</span>
                     {section.subsections && (
                       <div className="ml-2">
                         {expandedSections.includes(section.id) ? (
-                          <ChevronDown className="w-4 h-4" />
+                          <ChevronDown className="w-4 h-4 text-navy" />
                         ) : (
-                          <ChevronRight className="w-4 h-4" />
+                          <ChevronRight className="w-4 h-4 text-navy" />
                         )}
                       </div>
                     )}
@@ -254,7 +252,7 @@ const Docs = () => {
                             key={subsection.id}
                             variant="ghost"
                             size="sm"
-                            className="w-full justify-start text-left text-sm text-gray-600 dark:text-gray-300"
+                            className="w-full justify-start text-left text-sm text-navy"
                             onClick={() => scrollToSection(subsection.id)}
                           >
                             {subsection.title}
@@ -271,7 +269,7 @@ const Docs = () => {
         {/* Main Content */}
         <div className="flex-1 lg:ml-80">
           {/* Mobile Header */}
-          <div className="lg:hidden flex items-center justify-between p-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+          <div className="lg:hidden flex items-center justify-between p-4 bg-white border-b border-gray-200">
             <Button
               variant="ghost"
               size="sm"
@@ -279,26 +277,26 @@ const Docs = () => {
             >
               <Menu className="w-5 h-5" />
             </Button>
-            <span className="font-semibold dark:text-white">Documentation</span>
+            <span className="font-semibold text-navy">Documentation</span>
             <div className="w-5" />
           </div>
 
           <div className="max-w-4xl mx-auto p-6 lg:p-8">
             {/* Overview */}
             <section id="overview" data-section="overview" className="mb-16">
-              <h1 className="text-4xl font-bold mb-6 dark:text-white">
+              <h1 className="text-4xl font-bold mb-6 text-navy">
                 SUIVEST Technical Documentation
               </h1>
               <div className="space-y-6">
-                <Card>
+                <Card className="bg-white border border-gray-200">
                   <CardHeader>
-                    <CardTitle className="flex items-center space-x-2">
+                    <CardTitle className="flex items-center space-x-2 text-navy">
                       <Info className="w-5 h-5 text-electric" />
                       <span>What is SUIVEST?</span>
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    <p className="text-navy leading-relaxed">
                       SUIVEST is a no-loss savings platform that gamifies the
                       savings experience using prize pools powered by
                       yield-generating DeFi protocols on the Sui blockchain.
@@ -1349,7 +1347,7 @@ npm run build`}
                         {release.changes.map((change, index) => (
                           <li
                             key={index}
-                            className="text-sm text-gray-600 dark:text-gray-300 flex items-start"
+                            className="text-sm text-navy flex items-start"
                           >
                             <span className="w-1.5 h-1.5 bg-electric rounded-full mt-2 mr-2 flex-shrink-0"></span>
                             {change}
