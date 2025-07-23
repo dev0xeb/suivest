@@ -1,4 +1,5 @@
 import { useState } from "react";
+import icons from "../lib/icons";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -58,86 +59,86 @@ const pools: Pool[] = [
   {
     id: "1",
     token: {
-      name: "Sui",
+      name: "SUI",
       symbol: "SUI",
-      logo: "💧",
+      logo: icons.SUI,
       color: "electric",
     },
-    yieldSource: "Powered by Scallop",
-    weeklyPrize: "$1,500",
-    apr: "3.2%",
+    yieldSource: "Powered by Navi Protocol",
+    weeklyPrize: "$0",
+    apr: "0%",
     totalDeposits: {
-      usd: "$35,000",
-      token: "28,100 SUI",
+      usd: "$0",
+      token: "0 SUI",
     },
-    userStreak: 7,
+    userStreak: 0,
     boostApplied: true,
-    participants: 156,
-    timeLeft: "2d 14h",
+    participants: 0,
+    timeLeft: "0",
     status: "active",
   },
   {
     id: "2",
     token: {
-      name: "USD Coin",
+      name: "USDC",
       symbol: "USDC",
-      logo: "💵",
+      logo: icons.USDC,
       color: "teal",
     },
-    yieldSource: "Powered by Navi Lend",
-    weeklyPrize: "$2,200",
-    apr: "4.1%",
+    yieldSource: "Powered by Navi Protocol",
+    weeklyPrize: "$0",
+    apr: "0%",
     totalDeposits: {
-      usd: "$52,400",
-      token: "52,400 USDC",
+      usd: "$0",
+      token: "0 USDC",
     },
     userStreak: 0,
     boostApplied: false,
-    participants: 203,
-    timeLeft: "4d 8h",
+    participants: 0,
+    timeLeft: "",
     status: "active",
   },
   {
     id: "3",
     token: {
-      name: "Wrapped BTC",
-      symbol: "WBTC",
-      logo: "₿",
+      name: "Walrus",
+      symbol: "WAL",
+      logo: icons.Wal,
       color: "reward",
     },
-    yieldSource: "Powered by Scallop",
-    weeklyPrize: "$3,800",
-    apr: "2.8%",
+    yieldSource: "Powered by Navi Protocol",
+    weeklyPrize: "$0",
+    apr: "%",
     totalDeposits: {
-      usd: "$89,200",
-      token: "1.42 WBTC",
+      usd: "$0",
+      token: "0 WAL",
     },
-    userStreak: 3,
+    userStreak: 0,
     boostApplied: false,
-    participants: 89,
-    timeLeft: "1d 22h",
+    participants: 0,
+    timeLeft: "0",
     status: "active",
   },
   {
     id: "4",
     token: {
-      name: "Ethereum",
-      symbol: "ETH",
-      logo: "♦️",
+      name: "DEEP",
+      symbol: "DEEP",
+      logo: icons.DEEP,
       color: "electric",
     },
-    yieldSource: "Powered by Navi Lend",
-    weeklyPrize: "$980",
-    apr: "3.5%",
+    yieldSource: "Powered by Navi Protocol",
+    weeklyPrize: "$0",
+    apr: "0%",
     totalDeposits: {
-      usd: "$18,600",
-      token: "7.8 ETH",
+      usd: "$0",
+      token: "0 DEEP",
     },
     userStreak: 0,
     boostApplied: false,
-    participants: 67,
-    timeLeft: "Ended",
-    status: "ended",
+    participants: 0,
+    timeLeft: "0",
+    status: "active",
   },
 ];
 
@@ -233,7 +234,11 @@ const PoolCard = ({ pool }: { pool: Pool }) => {
             <div
               className={`w-12 h-12 rounded-xl bg-${pool.token.color}/10 flex items-center justify-center text-2xl`}
             >
-              {pool.token.logo}
+              <img
+                src={pool.token.logo}
+                alt={pool.token.symbol + " logo"}
+                className="w-8 h-8"
+              />
             </div>
             <div>
               <h3 className="font-bold text-lg text-gray-900">
@@ -454,7 +459,7 @@ const Pools = () => {
               for updates!
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              {["USDT", "DAI", "WETH", "MATIC"].map((token) => (
+              {["USDT", "NAVX", "WETH", "NS"].map((token) => (
                 <Badge key={token} variant="outline" className="text-gray-500">
                   {token}
                 </Badge>

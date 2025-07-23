@@ -36,14 +36,13 @@ import {
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-purple-900/10 to-gray-50">
+    <div className="min-h-screen bg-web3-dark">
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-16 pb-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-electric/5 to-teal/10"></div>
+      <section className="relative overflow-hidden pt-16 pb-24 bg-crypto-mesh">
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-electric/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-teal/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-reward/10 rounded-full blur-2xl animate-pulse delay-500"></div>
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-electric/10 rounded-full blur-3xl animate-pulse-glow"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple/10 rounded-full blur-3xl animate-pulse-glow delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-teal/10 rounded-full blur-2xl animate-pulse-glow delay-500"></div>
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -94,20 +93,22 @@ const About = () => {
       </section>
 
       {/* Our Mission */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-web3-surface">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8">
-              Our Mission
+            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-8">
+              Protocol Mission
             </h2>
-            <p className="text-2xl lg:text-3xl text-gray-700 leading-relaxed font-medium">
-              We believe saving should be{" "}
-              <span className="text-gradient font-bold">rewarding</span>, not
-              boring. That's why we built SUIVEST — to help people{" "}
-              <span className="text-electric font-bold">grow wealth</span>,{" "}
-              <span className="text-teal font-bold">have fun</span>, and{" "}
-              <span className="text-reward font-bold">win</span> without risking
-              their money.
+            <p className="text-2xl lg:text-3xl text-gray-300 leading-relaxed font-medium">
+              Building the future of{" "}
+              <span className="text-gradient font-bold">
+                decentralized savings
+              </span>
+              . SUIVEST empowers users to{" "}
+              <span className="text-electric font-bold">build wealth</span>,{" "}
+              <span className="text-teal font-bold">earn yield</span>, and{" "}
+              <span className="text-reward font-bold">win rewards</span> without
+              custodial risk.
             </p>
           </div>
         </div>
@@ -149,7 +150,7 @@ const About = () => {
                 step: "3",
                 title: "Win Prizes",
                 description:
-                  "Yield funds weekly prize draws – users never lose their principal",
+                  "Yield funds weekly prize draws, users never lose their principal",
                 icon: Trophy,
                 color: "reward",
                 details: "Winners take home the generated yield",

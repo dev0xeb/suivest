@@ -9,15 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import DepositModal from "@/components/DepositModal";
+import WithdrawModal from "@/components/WithdrawModal";
 import {
   Tooltip,
   TooltipContent,
@@ -126,130 +119,6 @@ const rewardHistory: RewardHistoryItem[] = [
   },
 ];
 
-const DepositModal = ({ pool }: { pool: UserPool }) => {
-  const [amount, setAmount] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button
-          size="sm"
-          className="bg-electric hover:bg-electric/90 text-white rounded-full"
-        >
-          <Plus className="w-4 h-4 mr-1" />
-          Deposit More
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle className="flex items-center space-x-2">
-            <span className="text-2xl">{pool.token.logo}</span>
-            <span>Add to {pool.token.symbol} Pool</span>
-          </DialogTitle>
-        </DialogHeader>
-        <div className="space-y-4 py-4">
-          <div className="space-y-2">
-            <Label htmlFor="amount">Additional Deposit Amount</Label>
-            <div className="relative">
-              <Input
-                id="amount"
-                type="number"
-                placeholder="0.00"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                className="pr-16"
-              />
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-gray-500">
-                {pool.token.symbol}
-              </div>
-            </div>
-          </div>
-          <div className="flex space-x-3">
-            <Button
-              variant="outline"
-              className="flex-1"
-              onClick={() => setIsOpen(false)}
-            >
-              Cancel
-            </Button>
-            <Button
-              className="flex-1 bg-electric hover:bg-electric/90"
-              disabled={!amount}
-            >
-              Add Deposit
-            </Button>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-};
-
-const WithdrawModal = ({ pool }: { pool: UserPool }) => {
-  const [amount, setAmount] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button
-          size="sm"
-          variant="outline"
-          className="border-gray-300 text-gray-600 hover:bg-gray-50 rounded-full"
-        >
-          <Minus className="w-4 h-4 mr-1" />
-          Withdraw
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle className="flex items-center space-x-2">
-            <span className="text-2xl">{pool.token.logo}</span>
-            <span>Withdraw from {pool.token.symbol} Pool</span>
-          </DialogTitle>
-        </DialogHeader>
-        <div className="space-y-4 py-4">
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
-            <p className="text-sm text-yellow-800">
-              ⚠️ Withdrawing will reset your streak for this pool
-            </p>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="withdraw-amount">Withdrawal Amount</Label>
-            <div className="relative">
-              <Input
-                id="withdraw-amount"
-                type="number"
-                placeholder="0.00"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                className="pr-16"
-              />
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-gray-500">
-                {pool.token.symbol}
-              </div>
-            </div>
-            <p className="text-xs text-gray-500">Available: {pool.deposited}</p>
-          </div>
-          <div className="flex space-x-3">
-            <Button
-              variant="outline"
-              className="flex-1"
-              onClick={() => setIsOpen(false)}
-            >
-              Cancel
-            </Button>
-            <Button variant="destructive" className="flex-1" disabled={!amount}>
-              Confirm Withdrawal
-            </Button>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-};
-
 const Dashboard = () => {
   const [username] = useState("0x1234...5678");
   const totalTickets = 43;
@@ -271,21 +140,40 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50/30">
+    <div className="min-h-screen bg-web3-dark">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Dashboard</h1>
-          <p className="text-lg text-gray-600">Welcome back, {username}!</p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-4xl font-bold text-white mb-2">
+                Protocol Dashboard
+              </h1>
+              <div className="flex items-center space-x-4">
+                <p className="text-lg text-gray-400">Welcome back,</p>
+                <code className="address text-sm">{username}</code>
+              </div>
+            </div>
+            <div className="text-right text-sm space-y-1">
+              <div className="text-gray-400">Connected Network:</div>
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-web3-success rounded-full"></div>
+                <span className="text-white font-mono-crypto">Sui Mainnet</span>
+              </div>
+              <div className="text-gray-500 font-mono-crypto">
+                Block: #2,847,391
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Account Overview Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {/* Tickets Card */}
-          <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+          <Card className="card-web3 card-glow hover:border-electric/40 transition-all duration-300">
             <CardHeader className="pb-3">
-              <CardTitle className="flex items-center space-x-2 text-lg">
-                <div className="w-10 h-10 bg-electric/10 rounded-xl flex items-center justify-center">
+              <CardTitle className="flex items-center space-x-2 text-lg text-white">
+                <div className="w-10 h-10 bg-electric/10 rounded-xl flex items-center justify-center border border-electric/20">
                   <Ticket className="w-5 h-5 text-electric" />
                 </div>
                 <span>Tickets</span>
@@ -293,33 +181,40 @@ const Dashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                <div className="text-3xl font-bold text-gray-900">
+                <div className="text-3xl font-bold text-white">
                   {totalTickets}
                 </div>
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Streak Progress</span>
-                    <span className="font-medium">7/10 weeks</span>
+                    <span className="text-gray-400">Streak Progress</span>
+                    <span className="font-medium text-electric">
+                      7/10 weeks
+                    </span>
                   </div>
-                  <Progress value={70} className="h-2" />
+                  <div className="w-full bg-web3-border rounded-full h-2">
+                    <div
+                      className="h-2 bg-gradient-to-r from-electric to-purple rounded-full"
+                      style={{ width: "70%" }}
+                    ></div>
+                  </div>
                 </div>
               </div>
             </CardContent>
           </Card>
 
           {/* SVT Tokens Card */}
-          <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+          <Card className="card-web3 card-glow hover:border-reward/40 transition-all duration-300">
             <CardHeader className="pb-3">
-              <CardTitle className="flex items-center space-x-2 text-lg">
-                <div className="w-10 h-10 bg-reward/10 rounded-xl flex items-center justify-center">
+              <CardTitle className="flex items-center space-x-2 text-lg text-white">
+                <div className="w-10 h-10 bg-reward/10 rounded-xl flex items-center justify-center border border-reward/20">
                   <Coins className="w-5 h-5 text-reward" />
                 </div>
-                <span>SVT Tokens</span>
+                <span>$SVT Tokens</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                <div className="text-3xl font-bold text-gray-900">
+                <div className="text-3xl font-bold text-white">
                   {svtTokens.toLocaleString()}
                 </div>
                 <div className="flex items-center space-x-1 text-sm">
@@ -331,45 +226,45 @@ const Dashboard = () => {
           </Card>
 
           {/* Total Deposited Card */}
-          <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+          <Card className="card-web3 card-glow hover:border-teal/40 transition-all duration-300">
             <CardHeader className="pb-3">
-              <CardTitle className="flex items-center space-x-2 text-lg">
-                <div className="w-10 h-10 bg-teal/10 rounded-xl flex items-center justify-center">
+              <CardTitle className="flex items-center space-x-2 text-lg text-white">
+                <div className="w-10 h-10 bg-teal/10 rounded-xl flex items-center justify-center border border-teal/20">
                   <TrendingUp className="w-5 h-5 text-teal" />
                 </div>
-                <span>Total Deposited</span>
+                <span>Total Value Locked</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                <div className="text-3xl font-bold text-gray-900">
+                <div className="text-3xl font-bold text-white">
                   ${totalDeposited.toFixed(2)}
                 </div>
-                <div className="text-sm text-gray-600">Across 2 pools</div>
+                <div className="text-sm text-gray-400 font-mono-crypto">
+                  Across 2 pools
+                </div>
               </div>
             </CardContent>
           </Card>
 
           {/* Rewards Earned Card */}
-          <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+          <Card className="card-web3 card-glow hover:border-purple/40 transition-all duration-300">
             <CardHeader className="pb-3">
-              <CardTitle className="flex items-center space-x-2 text-lg">
-                <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
-                  <Trophy className="w-5 h-5 text-purple-600" />
+              <CardTitle className="flex items-center space-x-2 text-lg text-white">
+                <div className="w-10 h-10 bg-purple/10 rounded-xl flex items-center justify-center border border-purple/20">
+                  <Trophy className="w-5 h-5 text-purple" />
                 </div>
-                <span>Rewards Earned</span>
+                <span>Protocol Rewards</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                <div className="text-3xl font-bold text-gray-900">
+                <div className="text-3xl font-bold text-white">
                   ${rewardsEarned.toFixed(2)}
                 </div>
                 <div className="flex items-center space-x-1 text-sm">
-                  <Trophy className="w-4 h-4 text-purple-600" />
-                  <span className="text-purple-600 font-medium">
-                    3 wins total
-                  </span>
+                  <Trophy className="w-4 h-4 text-purple" />
+                  <span className="text-purple font-medium">3 wins total</span>
                 </div>
               </div>
             </CardContent>
@@ -379,15 +274,15 @@ const Dashboard = () => {
         <div className="grid lg:grid-cols-3 gap-8 mb-8">
           {/* Active Pools Section */}
           <div className="lg:col-span-2">
-            <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
+            <Card className="card-web3 card-glow">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-electric/10 rounded-lg flex items-center justify-center">
+                <CardTitle className="flex items-center space-x-2 text-white">
+                  <div className="w-8 h-8 bg-electric/10 rounded-lg flex items-center justify-center border border-electric/20">
                     <TrendingUp className="w-4 h-4 text-electric" />
                   </div>
                   <span>Active Pools</span>
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-gray-400">
                   Pools you're currently participating in
                 </CardDescription>
               </CardHeader>
@@ -395,29 +290,29 @@ const Dashboard = () => {
                 {userPools.map((pool) => (
                   <div
                     key={pool.id}
-                    className="bg-gray-50/50 rounded-xl p-4 space-y-4"
+                    className="card-web3 rounded-xl p-4 space-y-4 border border-web3-border hover:border-electric/30 transition-all duration-300"
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex items-center space-x-3">
                         <div
-                          className={`w-12 h-12 rounded-xl bg-${pool.token.color}/10 flex items-center justify-center text-2xl`}
+                          className={`w-12 h-12 rounded-xl bg-${pool.token.color}/10 flex items-center justify-center text-2xl border border-${pool.token.color}/20`}
                         >
                           {pool.token.logo}
                         </div>
                         <div>
-                          <h4 className="font-semibold text-gray-900">
+                          <h4 className="font-semibold text-white">
                             {pool.token.name}
                           </h4>
-                          <p className="text-sm text-gray-600">
+                          <p className="text-sm text-gray-400 font-mono-crypto">
                             {pool.deposited} deposited
                           </p>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-lg font-bold text-gray-900">
+                        <div className="text-lg font-bold text-electric">
                           {pool.weeklyPrize}
                         </div>
-                        <div className="text-sm text-gray-600">
+                        <div className="text-sm text-gray-400">
                           weekly prize
                         </div>
                       </div>
@@ -426,12 +321,12 @@ const Dashboard = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <Flame className="w-4 h-4 text-reward" />
-                        <span className="text-sm font-medium">
+                        <span className="text-sm font-medium text-white">
                           {pool.streakWeeks} weeks active
                         </span>
                         <Badge
                           variant="outline"
-                          className="text-teal border-teal"
+                          className="text-teal border-teal/30 bg-teal/10"
                         >
                           <Clock className="w-3 h-3 mr-1" />
                           {pool.nextDraw}
@@ -448,7 +343,7 @@ const Dashboard = () => {
                             <Button
                               size="sm"
                               variant="outline"
-                              className="border-electric text-electric hover:bg-electric hover:text-white rounded-full"
+                              className="border-electric/30 text-electric hover:bg-electric hover:text-web3-bg rounded-full bg-electric/5"
                             >
                               <Target className="w-4 h-4 mr-1" />
                               Boost Odds
@@ -465,16 +360,16 @@ const Dashboard = () => {
 
                 {userPools.length === 0 && (
                   <div className="text-center py-8">
-                    <div className="w-16 h-16 mx-auto bg-gray-100 rounded-2xl flex items-center justify-center mb-4">
+                    <div className="w-16 h-16 mx-auto bg-web3-surface rounded-2xl flex items-center justify-center mb-4 border border-web3-border">
                       <Plus className="w-8 h-8 text-gray-400" />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    <h3 className="text-lg font-semibold text-white mb-2">
                       No Active Pools
                     </h3>
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-gray-400 mb-4">
                       Start your savings journey by joining a pool!
                     </p>
-                    <Button className="bg-electric hover:bg-electric/90">
+                    <Button className="bg-gradient-to-r from-electric to-purple hover:from-electric/90 hover:to-purple/90 btn-glow">
                       <Plus className="w-4 h-4 mr-2" />
                       Join a Pool
                     </Button>
@@ -486,15 +381,15 @@ const Dashboard = () => {
 
           {/* Streak Meter */}
           <div>
-            <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
+            <Card className="card-web3 card-glow">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-reward/10 rounded-lg flex items-center justify-center">
+                <CardTitle className="flex items-center space-x-2 text-white">
+                  <div className="w-8 h-8 bg-reward/10 rounded-lg flex items-center justify-center border border-reward/20">
                     <Flame className="w-4 h-4 text-reward" />
                   </div>
                   <span>Streak Progress</span>
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-gray-400">
                   Don't break your streak to earn bonus tickets!
                 </CardDescription>
               </CardHeader>
@@ -505,10 +400,10 @@ const Dashboard = () => {
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <div
-                            className={`aspect-square rounded-lg flex items-center justify-center text-xs font-medium transition-all cursor-pointer ${
+                            className={`aspect-square rounded-lg flex items-center justify-center text-xs font-medium transition-all cursor-pointer border ${
                               week.completed
-                                ? "bg-gradient-to-br from-reward to-electric text-white"
-                                : "bg-gray-100 text-gray-400 hover:bg-gray-200"
+                                ? "bg-gradient-to-br from-reward to-electric text-white border-reward/30 animate-pulse-glow"
+                                : "bg-web3-surface text-gray-400 hover:bg-web3-border border-web3-border hover:border-electric/30"
                             }`}
                           >
                             {week.week}
@@ -525,14 +420,16 @@ const Dashboard = () => {
                   ))}
                 </div>
 
-                <div className="bg-gradient-to-r from-reward/10 to-electric/10 rounded-xl p-4">
+                <div className="bg-gradient-to-r from-reward/10 to-electric/10 rounded-xl p-4 border border-reward/20">
                   <div className="flex items-center space-x-2 mb-2">
                     <Star className="w-4 h-4 text-reward" />
-                    <span className="text-sm font-medium">Next Milestone</span>
+                    <span className="text-sm font-medium text-white">
+                      Next Milestone
+                    </span>
                   </div>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-300">
                     Complete 3 more weeks to earn{" "}
-                    <span className="font-bold text-reward">
+                    <span className="font-bold text-gradient">
                       +5 bonus tickets
                     </span>
                   </p>
@@ -543,15 +440,17 @@ const Dashboard = () => {
         </div>
 
         {/* Rewards History */}
-        <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
+        <Card className="card-web3 card-glow">
           <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                <Trophy className="w-4 h-4 text-purple-600" />
+            <CardTitle className="flex items-center space-x-2 text-white">
+              <div className="w-8 h-8 bg-purple/10 rounded-lg flex items-center justify-center border border-purple/20">
+                <Trophy className="w-4 h-4 text-purple" />
               </div>
               <span>Rewards History</span>
             </CardTitle>
-            <CardDescription>Your past wins and prizes</CardDescription>
+            <CardDescription className="text-gray-400">
+              Your past wins and prizes
+            </CardDescription>
           </CardHeader>
           <CardContent>
             {rewardHistory.length > 0 ? (
@@ -559,21 +458,23 @@ const Dashboard = () => {
                 {rewardHistory.map((reward) => (
                   <div
                     key={reward.id}
-                    className="flex items-center justify-between p-3 bg-gray-50/50 rounded-lg"
+                    className="flex items-center justify-between p-3 bg-web3-surface/50 rounded-lg border border-web3-border hover:border-purple/30 transition-all duration-300"
                   >
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                        <Gift className="w-5 h-5 text-purple-600" />
+                      <div className="w-10 h-10 bg-purple/10 rounded-lg flex items-center justify-center border border-purple/20">
+                        <Gift className="w-5 h-5 text-purple" />
                       </div>
                       <div>
-                        <p className="font-medium text-gray-900">
+                        <p className="font-medium text-white">
                           {reward.week} - {reward.pool}
                         </p>
-                        <p className="text-sm text-gray-600">{reward.date}</p>
+                        <p className="text-sm text-gray-400 font-mono-crypto">
+                          {reward.date}
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-3">
-                      <span className="font-bold text-lg text-gray-900">
+                      <span className="font-bold text-lg text-gradient">
                         {reward.prize}
                       </span>
                       {reward.claimed ? (
@@ -581,7 +482,7 @@ const Dashboard = () => {
                       ) : (
                         <Button
                           size="sm"
-                          className="bg-purple-600 hover:bg-purple-700 text-white rounded-full"
+                          className="bg-gradient-to-r from-purple to-electric hover:from-purple/90 hover:to-electric/90 text-white rounded-full btn-glow"
                         >
                           Claim
                         </Button>
@@ -592,13 +493,13 @@ const Dashboard = () => {
               </div>
             ) : (
               <div className="text-center py-8">
-                <div className="w-16 h-16 mx-auto bg-gray-100 rounded-2xl flex items-center justify-center mb-4">
+                <div className="w-16 h-16 mx-auto bg-web3-surface rounded-2xl flex items-center justify-center mb-4 border border-web3-border">
                   <Trophy className="w-8 h-8 text-gray-400" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-white mb-2">
                   No Rewards Yet
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-400">
                   Keep saving consistently to increase your winning chances!
                 </p>
               </div>
