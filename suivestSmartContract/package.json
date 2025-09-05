@@ -1,0 +1,65 @@
+{
+  "name": "suivest-smart-contracts",
+  "version": "1.0.0",
+  "description": "Decentralized no-loss lottery vault system built on Sui blockchain",
+  "main": "index.js",
+  "scripts": {
+    "build": "sui move build",
+    "test": "sui move test",
+    "test:coverage": "sui move test --coverage",
+    "deploy:testnet": "tsx scripts/deploy.ts",
+    "deploy:mainnet": "SUI_NETWORK=mainnet tsx scripts/deploy.ts",
+    "deploy:devnet": "SUI_NETWORK=devnet tsx scripts/deploy.ts",
+    "lint": "sui move build --lint",
+    "format": "sui move format",
+    "clean": "rm -rf build",
+    "setup": "npm install && sui move build",
+    "dev": "npm run build && npm run test",
+    "verify": "sui move verify",
+    "docs": "sui move doc",
+    "analyze": "sui move analyze"
+  },
+  "keywords": [
+    "sui",
+    "blockchain",
+    "defi",
+    "lottery",
+    "vault",
+    "yield",
+    "move",
+    "smart-contracts"
+  ],
+  "author": "Suivest Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/suivest/smart-contracts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/suivest/smart-contracts/issues"
+  },
+  "homepage": "https://suivest.com",
+  "devDependencies": {
+    "@mysten/sui.js": "^0.50.0",
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@mysten/sui.js": "^0.50.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "files": [
+    "sources/",
+    "tests/",
+    "scripts/",
+    "Move.toml",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+} 

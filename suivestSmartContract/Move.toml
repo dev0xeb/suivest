@@ -1,0 +1,12 @@
+
+[package]
+name = "suivest"
+version = "0.0.1"
+
+[dependencies]
+Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/testnet-v1.17.0" }
+Pyth = { git = "https://github.com/pyth-network/pyth-crosschain.git", subdir = "target_chains/sui/contracts", rev = "main" }
+
+[addresses]
+suivest = "0x0"
+pyth = "0x40d7a4151e9a3a3a237b4eac1d948d7928b53315c3a805481bbea02a2a397a3a"
